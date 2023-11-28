@@ -1,7 +1,8 @@
-import Navbar from './Components/Navbar/navbar'
-import Body1 from './Components/Body/body1'
+// import Body1 from "./Components/Body/body1"
+import Body from './Components/Body/body'
+import { Container, Box } from '@mui/material'
 
-import { useState } from 'react'
+import Navbar from './Components/Navbar/navbar'
 
 import { Container, Box } from '@mui/material/'
 
@@ -15,8 +16,7 @@ function App() {
   return (
     <Container maxWidth="md">
       <Box sx={{ border: '3px solid red', height: '100vh' }}>
-        <Navbar onSearch={handleSearch} />
-        <Body1 searchTerm={searchTerm} />
+        <Navbar />
       </Box>
     </Container>
   )
