@@ -1,22 +1,49 @@
+import { Typography, Box, IconButton } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/material";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const baseUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/keyboard";
 
 function Body1() {
+  const [soundUrl, setSoundUrl] = useState([]);
+
+  useEffect(() => {
+    axios.get(baseUrl).then(({ data }) => setSoundUrl(data[0]));
+  }, []);
+
+  //
+
+  const handleSound = (event) => {
+    console.log("HOLA");
+  };
+
   return (
     <>
-      <Typography
-        variant="h2"
-        style={{ paddingLeft: "40px", marginTop: "20px" }}
-        fontWeight="bold"
-      >
-        Finstro diodenarl
-      </Typography>
-
-      <Box alignItems="row">
-        <PlayCircleIcon color="primary" fontSize="large" />
+      <Box sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h2"
+          style={{ paddingLeft: "40px", marginTop: "20px" }}
+          fontWeight="bold"
+        >
+          Finstro diodenarl
+        </Typography>
       </Box>
-
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
+          padding: "20px",
+        }}
+      >
+        <IconButton onClick={handleSound} color="primary">
+          <PlayCircleIcon
+            fontSize="large"
+            sx={{ fontSize: "4em", marginTop: "-85px", paddingRight: "60px" }}
+          />
+        </IconButton>
+      </Box>
       <Typography
         variant="h6"
         color="purple"
@@ -40,7 +67,6 @@ function Body1() {
       >
         Meaning, no puedorrr, no puedorrr
       </Typography>
-
       <Typography
         style={{ paddingLeft: "100px", marginTop: "40px" }}
         variant="body1"
