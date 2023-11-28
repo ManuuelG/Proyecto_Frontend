@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Container maxWidth="auto">
-      <Box sx={{ border: '3px solid red', height: '200vh' }}>
+      <Box sx={{ border: '3px solid red', height: 'auto' }}>
         <Navbar onSearch={handleSearch} />
         <Body searchTerm={searchTerm} />
       </Box>

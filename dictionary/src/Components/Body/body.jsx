@@ -20,10 +20,8 @@ function Body({ searchTerm }) {
     }
   }, [searchTerm])
 
-  useEffect(() => {
-    console.log(wordData)
-    // Aquí puedes realizar otras acciones basadas en el nuevo valor de wordData
-  }, [])
+  console.log(wordData)
+
   return (
     <>
       <Box
@@ -56,7 +54,9 @@ function Body({ searchTerm }) {
           color: '#A445ED',
         }}
       >
-        {wordData.phonetic}
+        {wordData.phonetics &&
+          wordData.phonetics.find(phonetic => phonetic.text) &&
+          wordData.phonetics.find(phonetic => phonetic.text).text}
       </Typography>
 
       <Typography
@@ -98,19 +98,23 @@ function Body({ searchTerm }) {
           },
         }}
       >
-        <li>
-          (etc.) A set of keys used to operate a typewriter, computer etc.
-        </li>
-        <li>
-          A component of many instruments including the piano, organ, and
-          harpsichord consisting of usually black and white keys that cause
-          different tones to be produced when struck.
-        </li>
-        <li>
-          A device with keys of a musical keyboard, used to control electronic
-          sound-producing devices which may be built into or separate from the
-          keyboard device.
-        </li>
+        {wordData.meanings &&
+          wordData.meanings
+            .filter(meaning => meaning.partOfSpeech === 'noun')
+            .map((meaning, index) => (
+              <div key={index}>
+                <ul>
+                  {meaning.definitions.map((definition, definitionIndex) => (
+                    <li key={definitionIndex}>
+                      {definition.definition}
+                      {definition.example && (
+                        <p>Example: {definition.example}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
       </Typography>
 
       <Typography
@@ -178,7 +182,24 @@ function Body({ searchTerm }) {
           },
         }}
       >
-        <li>To type on a computer keyboard.</li>
+        {wordData.meanings &&
+          wordData.meanings
+            .filter(meaning => meaning.partOfSpeech === 'verb')
+            .map((meaning, index) => (
+              <div key={index}>
+                <p>Part of Speech: {meaning.partOfSpeech}</p>
+                <ul>
+                  {meaning.definitions.map((definition, definitionIndex) => (
+                    <li key={definitionIndex}>
+                      {definition.definition}
+                      {definition.example && (
+                        <p>Example: {definition.example}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
       </Typography>
 
       <Typography
