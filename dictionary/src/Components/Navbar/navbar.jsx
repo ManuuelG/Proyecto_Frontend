@@ -99,7 +99,14 @@ function Navbar({ onSearch }) {
           <ColorThemeButton />
         </Stack>
       </Container>
-      <Container sx={{}}>
+      <Container
+        sx={{
+          marginTop: '50px',
+          border: '1px solid #ccc',
+          borderRadius: '20px',
+          padding: '10px',
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <IconButton size="large" type="submit">
             <SearchIcon />
