@@ -1,10 +1,7 @@
-// import Body1 from "./Components/Body/body1"
 import Body from './Components/Body/body'
 import { Container, Box } from '@mui/material'
-
+import { useState } from 'react'
 import Navbar from './Components/Navbar/navbar'
-
-import { Container, Box } from '@mui/material/'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -14,9 +11,10 @@ function App() {
   }
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ border: '3px solid red', height: '100vh' }}>
-        <Navbar />
+    <Container maxWidth="auto">
+      <Box sx={{ border: '3px solid red', height: '200vh' }}>
+        <Navbar onSearch={handleSearch} />
+        <Body searchTerm={searchTerm} />
       </Box>
     </Container>
   )

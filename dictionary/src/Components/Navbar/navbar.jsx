@@ -8,19 +8,13 @@ import {
   Divider,
   IconButton,
   InputBase,
-  InputAdornment,
-  OutlinedInput,
 } from '@mui/material/'
 
-import { useEffect, useState } from 'react'
-
-import axios from 'axios'
+import { useState } from 'react'
 
 import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
-
-const baseURL = 'https://api.dictionaryapi.dev/api/v2/entries/en/keyboard'
 
 function Navbar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
