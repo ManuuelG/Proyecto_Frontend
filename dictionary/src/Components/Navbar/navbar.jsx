@@ -75,7 +75,7 @@ function Navbar() {
       </Container>
       <Container
         sx={{
-          border: '2px solid yellow',
+          // border: '2px solid yellow',
         }}
       >
         <FormControl fullWidth sx={{ m: 1 }}>
