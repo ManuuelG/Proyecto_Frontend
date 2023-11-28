@@ -61,35 +61,6 @@ function Body({ searchTerm }) {
 
       <Typography
         sx={{
-          paddingLeft: '40px',
-          fontSize: '24px',
-          fontStyle: 'italic',
-          fontWeight: 700,
-          marginTop: '40px',
-        }}
-      >
-        noun
-      </Typography>
-
-      <Divider
-        orientation="horizontal"
-        flexItem
-        sx={{ marginLeft: '120px', marginTop: '-13px' }}
-      />
-
-      <Typography
-        sx={{
-          paddingLeft: '40px',
-          fontSize: '20px',
-          marginTop: '40px',
-          color: '#757575',
-        }}
-      >
-        Meaning
-      </Typography>
-
-      <Typography
-        sx={{
           paddingLeft: '60px',
           marginTop: '15px',
           fontSize: '18px',
@@ -103,6 +74,32 @@ function Body({ searchTerm }) {
             .filter(meaning => meaning.partOfSpeech === 'noun')
             .map((meaning, index) => (
               <div key={index}>
+                <Typography
+                  sx={{
+                    paddingLeft: '40px',
+                    fontSize: '24px',
+                    fontStyle: 'italic',
+                    fontWeight: 700,
+                    marginTop: '40px',
+                  }}
+                >
+                  {meaning.partOfSpeech}
+                </Typography>
+                <Divider
+                  orientation="horizontal"
+                  flexItem
+                  sx={{ marginLeft: '120px', marginTop: '-13px' }}
+                />
+                <Typography
+                  sx={{
+                    paddingLeft: '40px',
+                    fontSize: '20px',
+                    marginTop: '40px',
+                    color: '#757575',
+                  }}
+                >
+                  Meaning
+                </Typography>
                 <ul>
                   {meaning.definitions.map((definition, definitionIndex) => (
                     <li key={definitionIndex}>
