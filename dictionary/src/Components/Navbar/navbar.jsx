@@ -6,7 +6,9 @@ import {
   MenuItem,
   Stack,
   Divider,
-  IconButton,
+
+
+IconButton,
   InputBase,
 } from '@mui/material/'
 
@@ -27,6 +29,7 @@ function Navbar({ onSearch }) {
     event.preventDefault()
     onSearch(searchTerm)
   }
+
 
   return (
     <>
