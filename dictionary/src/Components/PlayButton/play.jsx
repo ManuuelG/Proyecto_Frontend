@@ -13,7 +13,7 @@ const PlayCircleButton = () => {
   }, []);
 
   const handleSound = (event) => {
-    console.log("PEPE CASTRO OKUPA");
+    console.log("MANUE PAGA LA COCA");
   };
 
   return (
