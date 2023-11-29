@@ -106,6 +106,7 @@ function Navbar({ onSearch }) {
         </Stack>
       </Container>
 
+
       <Container
         sx={{
           display: 'flex',
@@ -117,6 +118,17 @@ function Navbar({ onSearch }) {
         }}
       >
         <form onSubmit={handleSubmit} style={{ width: '100%', backgroundColor: '#f0f0f0', display: 'flex', borderRadius:'16px' }}>
+
+      <Container
+        sx={{
+          marginTop: '50px',
+          border: '1px solid #ccc',
+          borderRadius: '20px',
+          padding: '10px',
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+ 
           <IconButton size="large" type="submit">
             <SearchIcon />
           </IconButton>
