@@ -100,23 +100,22 @@ function Body({ searchTerm }) {
               </Typography>
               <ul>
                 {meaning.definitions.map((definition, definitionIndex) => (
-                  <li key={definitionIndex}>
-                    {definition.definition}
-                    {definition.example && <p>Example: {definition.example}</p>}
-                  </li>
+                  <li key={definitionIndex}>{definition.definition}</li>
                 ))}
               </ul>
-              <Typography
-                sx={{
-                  color: '#757575',
-                  paddingLeft: '40px',
-                  fontSize: '20px',
-                  fontWeight: 400,
-                  marginTop: '40px',
-                }}
-              >
-                Synonyms
-              </Typography>
+              {meaning.synonyms.length > 0 && (
+                <Typography
+                  sx={{
+                    color: '#757575',
+                    paddingLeft: '40px',
+                    fontSize: '20px',
+                    fontWeight: 400,
+                    marginTop: '40px',
+                  }}
+                >
+                  {Object.keys(meaning)[2]}
+                </Typography>
+              )}
               <Typography
                 sx={{
                   color: '#A445ED',
@@ -126,88 +125,11 @@ function Body({ searchTerm }) {
                   fontWeight: 700,
                 }}
               >
-                {meaning.synonyms?.map((synonym, synonymIndex) => (
-                  <span key={synonymIndex}>
-                    {synonym}
-                    {synonymIndex < meaning.synonyms.length - 1 && ', '}
-                  </span>
-                ))}
+                {meaning.synonyms.join(' ')}
               </Typography>
             </Box>
           ))}
       </Typography>
-
-      {/* -----------------------------------------------------------------------------------
-
-      <Typography
-        variant="body2"
-        sx={{
-          paddingLeft: '40px',
-          fontSize: '24px',
-          fontStyle: 'italic',
-          fontWeight: 700,
-          marginTop: '40px',
-        }}
-      >
-        verb
-      </Typography>
-      <Divider
-        orientation="horizontal"
-        flexItem
-        sx={{ marginLeft: '120px', marginTop: '-16px' }}
-      />
-
-      <Typography
-        sx={{
-          paddingLeft: '40px',
-          fontSize: '20px',
-          marginTop: '40px',
-          color: '#757575',
-        }}
-      >
-        Meaning
-      </Typography>
-
-      <Typography
-        sx={{
-          paddingLeft: '60px',
-          marginTop: '15px',
-          fontSize: '18px',
-          '& li': {
-            marginBottom: '13px',
-          },
-        }}
-      >
-        {wordData.meanings &&
-          wordData.meanings
-            .filter(meaning => meaning.partOfSpeech === 'verb')
-            .map((meaning, index) => (
-              <Box key={index}>
-                <p>Part of Speech: {meaning.partOfSpeech}</p>
-                <ul>
-                  {meaning.definitions.map((definition, definitionIndex) => (
-                    <li key={definitionIndex}>
-                      {definition.definition}
-                      {definition.example && (
-                        <p>Example: {definition.example}</p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Box>
-            ))}
-      </Typography>
-
-      <Typography
-        sx={{
-          paddingLeft: '85px',
-          marginTop: '15px',
-          fontSize: '18px',
-          color: '#757575',
-        }}
-      >
-        “Keyboarding is the part of this job I hate the most.”
-      </Typography> */}
 
       <Divider orientation="horizontal" flexItem sx={{ marginTop: '40px' }} />
 
