@@ -20,10 +20,15 @@ function Body({ searchTerm }) {
     }
   }, [searchTerm]);
 
+
   useEffect(() => {
     console.log(wordData);
     // Aquí puedes realizar otras acciones basadas en el nuevo valor de wordData
   }, []);
+
+  console.log(wordData)
+
+
   return (
     <>
       <Box
@@ -56,6 +61,7 @@ function Body({ searchTerm }) {
           color: "#A445ED",
         }}
       >
+
         {wordData.phonetic}
       </Typography>
 
@@ -86,6 +92,11 @@ function Body({ searchTerm }) {
         }}
       >
         Meaning
+
+        {wordData.phonetics &&
+          wordData.phonetics.find(phonetic => phonetic.text) &&
+          wordData.phonetics.find(phonetic => phonetic.text).text}
+
       </Typography>
 
       <Typography
@@ -98,6 +109,7 @@ function Body({ searchTerm }) {
           },
         }}
       >
+
         <li>
           (etc.) A set of keys used to operate a typewriter, computer etc.
         </li>
@@ -135,9 +147,77 @@ function Body({ searchTerm }) {
         }}
       >
         electronic keyboard
+
+        {wordData.meanings &&
+          wordData.meanings.map((meaning, index) => (
+            <Box key={index}>
+              <Typography
+                sx={{
+                  paddingLeft: '40px',
+                  fontSize: '24px',
+                  fontStyle: 'italic',
+                  fontWeight: 700,
+                  marginTop: '40px',
+                }}
+              >
+                {meaning.partOfSpeech}
+              </Typography>
+              <Divider
+                orientation="horizontal"
+                flexItem
+                sx={{ marginLeft: '120px', marginTop: '-13px' }}
+              />
+              <Typography
+                sx={{
+                  paddingLeft: '40px',
+                  fontSize: '20px',
+                  marginTop: '40px',
+                  color: '#757575',
+                }}
+              >
+                Meaning
+              </Typography>
+              <ul>
+                {meaning.definitions.map((definition, definitionIndex) => (
+                  <li key={definitionIndex}>
+                    {definition.definition}
+                    {definition.example && <p>Example: {definition.example}</p>}
+                  </li>
+                ))}
+              </ul>
+              <Typography
+                sx={{
+                  color: '#757575',
+                  paddingLeft: '40px',
+                  fontSize: '20px',
+                  fontWeight: 400,
+                  marginTop: '40px',
+                }}
+              >
+                Synonyms
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#A445ED',
+                  paddingLeft: '150px',
+                  marginTop: '-30px',
+                  fontSize: '20px',
+                  fontWeight: 700,
+                }}
+              >
+                {meaning.synonyms?.map((synonym, synonymIndex) => (
+                  <span key={synonymIndex}>
+                    {synonym}
+                    {synonymIndex < meaning.synonyms.length - 1 && ', '}
+                  </span>
+                ))}
+              </Typography>
+            </Box>
+          ))}
+
       </Typography>
 
-      {/* ----------------------------------------------------------------------------------- */}
+      {/* -----------------------------------------------------------------------------------
 
       <Typography
         variant="body2"
@@ -178,7 +258,24 @@ function Body({ searchTerm }) {
           },
         }}
       >
-        <li>To type on a computer keyboard.</li>
+        {wordData.meanings &&
+          wordData.meanings
+            .filter(meaning => meaning.partOfSpeech === 'verb')
+            .map((meaning, index) => (
+              <Box key={index}>
+                <p>Part of Speech: {meaning.partOfSpeech}</p>
+                <ul>
+                  {meaning.definitions.map((definition, definitionIndex) => (
+                    <li key={definitionIndex}>
+                      {definition.definition}
+                      {definition.example && (
+                        <p>Example: {definition.example}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </Box>
+            ))}
       </Typography>
 
       <Typography
@@ -190,7 +287,7 @@ function Body({ searchTerm }) {
         }}
       >
         “Keyboarding is the part of this job I hate the most.”
-      </Typography>
+      </Typography> */}
 
       <Divider orientation="horizontal" flexItem sx={{ marginTop: "40px" }} />
 
