@@ -6,24 +6,38 @@ import {
   MenuItem,
   Stack,
   Divider,
-  InputAdornment,
-  OutlinedInput,
-} from "@mui/material/";
 
-import SearchIcon from "@mui/icons-material/Search";
 
-import ColorThemeButton from "../ColorThemeButton/ColorThemeButton";
+IconButton,
+  InputBase,
+} from '@mui/material/'
 
-function Navbar() {
+import { useState } from 'react'
+
+import SearchIcon from '@mui/icons-material/Search'
+
+import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
+
+function Navbar({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleChange = event => {
+    setSearchTerm(event.target.value)
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    onSearch(searchTerm)
+  }
+
+
   return (
     <>
       <Container
         sx={{
-          border: "2px solid blue",
-          display: "flex",
-
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
         <svg
@@ -53,9 +67,9 @@ function Navbar() {
         </svg>
         <Stack
           margin={1}
-          direction={"row"}
+          direction={'row'}
           spacing={2}
-          alignItems={"center"}
+          alignItems={'center'}
           divider={<Divider orientation="vertical" flexItem />}
         >
           <FormControl sx={{ minWidth: 120 }} size="small">
@@ -64,36 +78,44 @@ function Navbar() {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Font"
+              sx={{
+                boxShadow: 'none',
+                '.MuiOutlinedInput-notchedOutline': { border: 0 },
+                '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+                '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+              }}
             >
-              <MenuItem>Serif</MenuItem>
-              <MenuItem>Sans Serif</MenuItem>
-              <MenuItem>Monospace</MenuItem>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem>Ten</MenuItem>
+              <MenuItem>Twenty</MenuItem>
+              <MenuItem>Thirty</MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton />
         </Stack>
       </Container>
-      <Container
-        sx={{
-          border: "2px solid yellow",
-        }}
-      >
-        <FormControl fullWidth sx={{ m: 1 }}>
-          <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
-          <OutlinedInput
-            sx={{ borderRadius: "20px" }}
-            id="outlined-adornment-search"
-            endAdornment={
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            }
-            label="Search"
+      <Container sx={{}}>
+        <form onSubmit={handleSubmit}>
+          <IconButton size="large" type="submit">
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleChange}
           />
-        </FormControl>
+        </form>
       </Container>
     </>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
