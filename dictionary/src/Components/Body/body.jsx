@@ -4,7 +4,7 @@ import Play from '../PlayButton/play'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function Body({ searchTerm }) {
+function Body({ searchTerm, selectedFont }) {
   const [wordData, setWordData] = useState({})
 
   useEffect(() => {
@@ -30,6 +30,7 @@ function Body({ searchTerm }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           marginTop: '63px',
+          fontFamily: selectedFont,
         }}
       >
         <Typography
@@ -37,6 +38,7 @@ function Body({ searchTerm }) {
             marginLeft: '40px',
             fontSize: '64px',
             fontWeight: '700',
+            fontFamily: selectedFont,
           }}
         >
           {wordData.word}
@@ -51,6 +53,7 @@ function Body({ searchTerm }) {
           marginTop: '8px',
           fontSize: '24px',
           color: '#A445ED',
+          fontFamily: selectedFont,
         }}
       >
         {wordData.phonetics &&
@@ -65,6 +68,7 @@ function Body({ searchTerm }) {
           fontSize: '18px',
           '& li': {
             marginBottom: '13px',
+            fontFamily: selectedFont,
           },
         }}
       >
@@ -78,6 +82,7 @@ function Body({ searchTerm }) {
                   fontStyle: 'italic',
                   fontWeight: 700,
                   marginTop: '40px',
+                  fontFamily: selectedFont,
                 }}
               >
                 {meaning.partOfSpeech}
@@ -93,6 +98,7 @@ function Body({ searchTerm }) {
                   fontSize: '20px',
                   marginTop: '40px',
                   color: '#757575',
+                  fontFamily: selectedFont,
                 }}
               >
                 Meaning
@@ -110,6 +116,7 @@ function Body({ searchTerm }) {
                     fontSize: '20px',
                     fontWeight: 400,
                     marginTop: '40px',
+                    fontFamily: selectedFont,
                   }}
                 >
                   {Object.keys(meaning)[2]}
@@ -122,6 +129,7 @@ function Body({ searchTerm }) {
                   marginTop: '-30px',
                   fontSize: '20px',
                   fontWeight: 700,
+                  fontFamily: selectedFont,
                 }}
               >
                 {meaning.synonyms.join(' ')}
@@ -135,26 +143,38 @@ function Body({ searchTerm }) {
       <Typography
         sx={{
           paddingLeft: '40px',
+          paddingBottom: '10px',
           fontSize: '14px',
           marginTop: '15px',
           color: '#757575',
           textDecoration: 'underline',
+          fontFamily: selectedFont,
         }}
       >
-        Source
+        {Object.keys(wordData).find(key => key.includes('source'))}
       </Typography>
 
-      <Typography
-        sx={{
-          paddingLeft: '100px',
-          fontSize: '14px',
-          marginTop: '-21px',
-          color: '#2D2D2D',
-          textDecoration: 'underline',
-        }}
-      >
-        Esto tiene que ser el enlace
-      </Typography>
+      {wordData.sourceUrls && (
+        <Typography
+          sx={{
+            paddingLeft: '150px',
+            fontSize: '14px',
+            marginTop: '-30px',
+            color: '#2D2D2D',
+            textDecoration: 'underline',
+          }}
+        >
+          {wordData.sourceUrls && wordData.sourceUrls.length > 0 && (
+            <a
+              href={wordData.sourceUrls[0]}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {wordData.sourceUrls[0]}
+            </a>
+          )}
+        </Typography>
+      )}
     </>
   )
 }

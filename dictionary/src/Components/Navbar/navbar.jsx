@@ -16,7 +16,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 
-function Navbar({ onSearch, onThemeChange }) {
+function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleChange = event => {
@@ -79,6 +79,11 @@ function Navbar({ onSearch, onThemeChange }) {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Font"
+              value={selectedFont}
+              onChange={e => {
+                const font = e.target.value
+                onFontChange(font)
+              }}
               sx={{
                 boxShadow: 'none',
                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
@@ -95,9 +100,9 @@ function Navbar({ onSearch, onThemeChange }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem>Ten</MenuItem>
-              <MenuItem>Twenty</MenuItem>
-              <MenuItem>Thirty</MenuItem>
+              <MenuItem value="monospace">Monospace</MenuItem>
+              <MenuItem value="sans-serif">Sans-serif</MenuItem>
+              <MenuItem value="serif">Serif</MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton onThemeChange={onThemeChange} />
