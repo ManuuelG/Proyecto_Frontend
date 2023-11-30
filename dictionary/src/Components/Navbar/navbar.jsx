@@ -35,7 +35,6 @@ function Navbar({ onSearch }) {
         disableGutters
         sx={{
           marginTop: '10px',
-          //border: '2px solid blue',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
