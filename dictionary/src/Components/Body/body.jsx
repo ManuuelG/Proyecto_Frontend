@@ -24,26 +24,27 @@ function Body({ searchTerm }) {
 
   return (
     <>
-      <Box
+    <Box
         sx={{
-          float: 'right',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           marginTop: '63px',
         }}
       >
-        <Play />
-      </Box>
-
-      <Box>
         <Typography
-          variant="h2"
           sx={{
-            paddingLeft: '40px',
-            marginTop: '43px',
+            marginLeft: '40px',
+            fontSize: '64px',
             fontWeight: '700',
           }}
         >
           {wordData.word}
         </Typography>
+
+        {wordData.phonetics && wordData.phonetics.length > 0 && (
+          <Play />
+        )}
       </Box>
 
       <Typography
