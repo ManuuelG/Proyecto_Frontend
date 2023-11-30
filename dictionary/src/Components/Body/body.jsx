@@ -28,7 +28,7 @@ function Body({ searchTerm }) {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between', // Alinea los elementos a la derecha y a la izquierda
+        justifyContent: 'space-between',
         marginTop: '63px',
       }}
     >
@@ -43,7 +43,7 @@ function Body({ searchTerm }) {
       </Typography>
 
       {wordData.phonetics && wordData.phonetics.length > 0 && (
-        <Play />
+        <Play/>
       )}
     </Box>
 
