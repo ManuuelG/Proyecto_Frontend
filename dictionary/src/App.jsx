@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import Navbar from './Components/Navbar/navbar'
 import Body from './Components/Body/body'
 
@@ -16,20 +16,19 @@ function App() {
   }
 
   return (
-    <Container maxWidth="auto">
-      <Box
-        sx={{
-          height: 'auto',
-          backgroundColor: themeMode === 'dark' ? '#303030' : '#ffffff',
-          color: themeMode === 'dark' ? '#ffffff' : '#000000',
-          transition: 'background-color 0.3s, color 0.3s',
-        }}
-      >
-        <Navbar onSearch={handleSearch} onThemeChange={handleThemeChange} />
+    <Box
+      sx={{
+        height: 'auto',
 
-        <Body searchTerm={searchTerm} />
-      </Box>
-    </Container>
+        backgroundColor: themeMode === 'dark' ? '#303030' : '#ffffff',
+        color: themeMode === 'dark' ? '#ffffff' : '#000000',
+        transition: 'background-color 0.3s, color 0.3s',
+      }}
+    >
+      <Navbar onSearch={handleSearch} onThemeChange={handleThemeChange} />
+
+      <Body searchTerm={searchTerm} />
+    </Box>
   )
 }
 
