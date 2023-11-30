@@ -2,26 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import axios from "axios";
 
-const baseUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/keyboard";
+const baseUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/keyboard'
 
-const PlayCircleButton = () => {
-  const [soundUrl, setSoundUrl] = useState([]);
+const Play = () => {
+  const [soundUrl, setSoundUrl] = useState([])
 
   useEffect(() => {
-    axios.get(baseUrl).then(({ data }) => setSoundUrl(data[0]));
-  }, []);
+    axios.get(baseUrl).then(({ data }) => setSoundUrl(data[0]))
+  }, [])
 
-  const handleSound = (event) => {
-    console.log("MANUE PAGA LA COCA");
-  };
+  const handleSound = event => {
+    console.log('MANUE PAGA LA COCA')
+  }
 
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "flex-start",
-        padding: "20px",
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        padding: '20px',
       }}
     >
 
@@ -52,10 +52,10 @@ const PlayCircleButton = () => {
       </svg>
     </button>
     </Box>
-  );
-};
+  )
+}
 
-export default PlayCircleButton;
+export default Play;
 
 
 

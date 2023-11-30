@@ -16,7 +16,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 
-function Navbar({ onSearch }) {
+function Navbar({ onSearch, onThemeChange }) {
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleChange = event => {
@@ -100,7 +100,7 @@ function Navbar({ onSearch }) {
               <MenuItem>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <ColorThemeButton />
+          <ColorThemeButton onThemeChange={onThemeChange} />
         </Stack>
       </Container>
       <Container
