@@ -24,40 +24,41 @@ function Body({ searchTerm }) {
 
   return (
     <>
-      <Box
-        sx={{
-          float: 'right',
-          marginTop: '63px',
-        }}
-      >
-        <Play />
-      </Box>
-
-      <Box>
-        <Typography
-          variant="h2"
-          sx={{
-            paddingLeft: '40px',
-            marginTop: '43px',
-            fontWeight: '700',
-          }}
-        >
-          {wordData.word}
-        </Typography>
-      </Box>
-
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between', // Alinea los elementos a la derecha y a la izquierda
+        marginTop: '63px',
+      }}
+    >
       <Typography
         sx={{
           marginLeft: '40px',
-          marginTop: '8px',
-          fontSize: '24px',
-          color: '#A445ED',
+          fontSize: '64px',
+          fontWeight: '700',
         }}
       >
-        {wordData.phonetics &&
-          wordData.phonetics.find(phonetic => phonetic.text) &&
-          wordData.phonetics.find(phonetic => phonetic.text).text}
+        {wordData.word}
       </Typography>
+
+      {wordData.phonetics && wordData.phonetics.length > 0 && (
+        <Play />
+      )}
+    </Box>
+
+    <Typography
+      sx={{
+        marginLeft: '40px',
+        marginTop: '8px',
+        fontSize: '24px',
+        color: '#A445ED',
+      }}
+    >
+      {wordData.phonetics &&
+        wordData.phonetics.find(phonetic => phonetic.text) &&
+        wordData.phonetics.find(phonetic => phonetic.text).text}
+    </Typography>
 
       <Typography
         sx={{

@@ -34,7 +34,6 @@ function Navbar({ onSearch }) {
       <Container maxWidth="100" disableGutters
         sx={{
           marginTop: '10px',
-          //border: '2px solid blue',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -131,7 +130,7 @@ function Navbar({ onSearch }) {
             }}
           />
         </form>
-      </Container>;
+      </Container>
     </>
   )
 }
