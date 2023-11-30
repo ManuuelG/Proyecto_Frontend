@@ -1,4 +1,5 @@
-import { styled } from '@mui/material/styles'
+import React from 'react'
+import { styled } from '@mui/system'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
@@ -50,11 +51,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }))
 
-function ColorThemeButton() {
+function ColorThemeButton({ onThemeChange }) {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+        control={<MaterialUISwitch sx={{ m: 1 }} onChange={onThemeChange} />}
       />
     </FormGroup>
   )
