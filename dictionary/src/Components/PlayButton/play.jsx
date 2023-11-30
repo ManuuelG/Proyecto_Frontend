@@ -13,7 +13,7 @@ const PlayCircleButton = () => {
   }, []);
 
   const handleSound = (event) => {
-    console.log("MANUE PAGA LA COCA");
+    console.log(soundUrl.phonetics);
   };
 
   return (
