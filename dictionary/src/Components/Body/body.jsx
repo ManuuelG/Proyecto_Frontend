@@ -24,7 +24,7 @@ function Body({ searchTerm }) {
 
   return (
     <>
-    <Box
+      <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -42,9 +42,7 @@ function Body({ searchTerm }) {
           {wordData.word}
         </Typography>
 
-        {wordData.phonetics && wordData.phonetics.length > 0 && (
-          <Play />
-        )}
+        {wordData.phonetics && wordData.phonetics.length > 0 && <Play />}
       </Box>
 
       <Typography
