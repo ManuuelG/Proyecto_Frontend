@@ -1,23 +1,38 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { Box, IconButton } from "@mui/material";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import axios from "axios";
 
-const Play = () => {
+const baseUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/keyboard";
+
+const PlayCircleButton = () => {
+  const [soundUrl, setSoundUrl] = useState([]);
+
+  useEffect(() => {
+    axios.get(baseUrl).then(({ data }) => setSoundUrl(data[0]));
+  }, []);
+
+  const handleSound = (event) => {
+    console.log("MANUE PAGA LA COCA");
+  };
+
   return (
-    <svg
-      width="75"
-      height="75"
-      viewBox="0 0 75 75"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "flex-start",
+        padding: "20px",
+      }}
     >
-      <circle opacity="0.25" cx="37.5" cy="37.5" r="37.5" fill="#A445ED" />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M29 27V48L50 37.5L29 27Z"
-        fill="#A445ED"
-      />
-    </svg>
-  )
-}
+      <IconButton onClick={handleSound} color="primary">
+        <PlayCircleIcon
+          fontSize="large"
+          sx={{ fontSize: "4em", marginTop: "-85px", paddingRight: "60px" }}
+        />
+      </IconButton>
+    </Box>
+  );
+};
 
-export default Play
+export default PlayCircleButton;
