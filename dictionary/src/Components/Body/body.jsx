@@ -32,9 +32,7 @@ function Body({ searchTerm, selectedFont }) {
           marginTop: "63px",
           fontFamily: selectedFont,
         }}
-      >
-        <Play data={wordData} />
-      </Box>
+      ></Box>
 
       <Box>
         <Typography
@@ -48,6 +46,9 @@ function Body({ searchTerm, selectedFont }) {
         >
           {wordData.word}
         </Typography>
+        {wordData.phonetics && wordData.phonetics.length > 0 && (
+          <Play data={wordData} />
+        )}
       </Box>
 
       <Typography
