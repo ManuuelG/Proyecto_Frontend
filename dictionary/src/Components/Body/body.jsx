@@ -1,45 +1,45 @@
-import { Typography, Divider, Box } from '@mui/material'
-import Play from '../PlayButton/play'
+import { Typography, Divider, Box } from "@mui/material";
+import Play from "../PlayButton/play";
 
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Body({ searchTerm }) {
-  const [wordData, setWordData] = useState({})
+  const [wordData, setWordData] = useState({});
 
   useEffect(() => {
     if (searchTerm) {
       axios
         .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
-        .then(response => {
-          setWordData(response.data[0])
+        .then((response) => {
+          setWordData(response.data[0]);
         })
-        .catch(error => {
-          console.error('Error fetching word data', error)
-        })
+        .catch((error) => {
+          console.error("Error fetching word data", error);
+        });
     }
-  }, [searchTerm])
+  }, [searchTerm]);
 
-  console.log(wordData)
+  console.log(wordData);
 
   return (
     <>
       <Box
         sx={{
-          float: 'right',
-          marginTop: '63px',
+          float: "right",
+          marginTop: "63px",
         }}
       >
-        <Play />
+        <Play data={wordData} />
       </Box>
 
       <Box>
         <Typography
           variant="h2"
           sx={{
-            paddingLeft: '40px',
-            marginTop: '43px',
-            fontWeight: '700',
+            paddingLeft: "40px",
+            marginTop: "43px",
+            fontWeight: "700",
           }}
         >
           {wordData.word}
@@ -48,24 +48,24 @@ function Body({ searchTerm }) {
 
       <Typography
         sx={{
-          marginLeft: '40px',
-          marginTop: '8px',
-          fontSize: '24px',
-          color: '#A445ED',
+          marginLeft: "40px",
+          marginTop: "8px",
+          fontSize: "24px",
+          color: "#A445ED",
         }}
       >
         {wordData.phonetics &&
-          wordData.phonetics.find(phonetic => phonetic.text) &&
-          wordData.phonetics.find(phonetic => phonetic.text).text}
+          wordData.phonetics.find((phonetic) => phonetic.text) &&
+          wordData.phonetics.find((phonetic) => phonetic.text).text}
       </Typography>
 
       <Typography
         sx={{
-          paddingLeft: '60px',
-          marginTop: '15px',
-          fontSize: '18px',
-          '& li': {
-            marginBottom: '13px',
+          paddingLeft: "60px",
+          marginTop: "15px",
+          fontSize: "18px",
+          "& li": {
+            marginBottom: "13px",
           },
         }}
       >
@@ -74,11 +74,11 @@ function Body({ searchTerm }) {
             <Box key={index}>
               <Typography
                 sx={{
-                  paddingLeft: '40px',
-                  fontSize: '24px',
-                  fontStyle: 'italic',
+                  paddingLeft: "40px",
+                  fontSize: "24px",
+                  fontStyle: "italic",
                   fontWeight: 700,
-                  marginTop: '40px',
+                  marginTop: "40px",
                 }}
               >
                 {meaning.partOfSpeech}
@@ -86,14 +86,14 @@ function Body({ searchTerm }) {
               <Divider
                 orientation="horizontal"
                 flexItem
-                sx={{ marginLeft: '120px', marginTop: '-13px' }}
+                sx={{ marginLeft: "120px", marginTop: "-13px" }}
               />
               <Typography
                 sx={{
-                  paddingLeft: '40px',
-                  fontSize: '20px',
-                  marginTop: '40px',
-                  color: '#757575',
+                  paddingLeft: "40px",
+                  fontSize: "20px",
+                  marginTop: "40px",
+                  color: "#757575",
                 }}
               >
                 Meaning
@@ -108,28 +108,28 @@ function Body({ searchTerm }) {
               </ul>
               <Typography
                 sx={{
-                  color: '#757575',
-                  paddingLeft: '40px',
-                  fontSize: '20px',
+                  color: "#757575",
+                  paddingLeft: "40px",
+                  fontSize: "20px",
                   fontWeight: 400,
-                  marginTop: '40px',
+                  marginTop: "40px",
                 }}
               >
                 Synonyms
               </Typography>
               <Typography
                 sx={{
-                  color: '#A445ED',
-                  paddingLeft: '150px',
-                  marginTop: '-30px',
-                  fontSize: '20px',
+                  color: "#A445ED",
+                  paddingLeft: "150px",
+                  marginTop: "-30px",
+                  fontSize: "20px",
                   fontWeight: 700,
                 }}
               >
                 {meaning.synonyms?.map((synonym, synonymIndex) => (
                   <span key={synonymIndex}>
                     {synonym}
-                    {synonymIndex < meaning.synonyms.length - 1 && ', '}
+                    {synonymIndex < meaning.synonyms.length - 1 && ", "}
                   </span>
                 ))}
               </Typography>
@@ -209,15 +209,15 @@ function Body({ searchTerm }) {
         “Keyboarding is the part of this job I hate the most.”
       </Typography> */}
 
-      <Divider orientation="horizontal" flexItem sx={{ marginTop: '40px' }} />
+      <Divider orientation="horizontal" flexItem sx={{ marginTop: "40px" }} />
 
       <Typography
         sx={{
-          paddingLeft: '40px',
-          fontSize: '14px',
-          marginTop: '15px',
-          color: '#757575',
-          textDecoration: 'underline',
+          paddingLeft: "40px",
+          fontSize: "14px",
+          marginTop: "15px",
+          color: "#757575",
+          textDecoration: "underline",
         }}
       >
         Source
@@ -225,16 +225,16 @@ function Body({ searchTerm }) {
 
       <Typography
         sx={{
-          paddingLeft: '100px',
-          fontSize: '14px',
-          marginTop: '-21px',
-          color: '#2D2D2D',
-          textDecoration: 'underline',
+          paddingLeft: "100px",
+          fontSize: "14px",
+          marginTop: "-21px",
+          color: "#2D2D2D",
+          textDecoration: "underline",
         }}
       >
         Esto tiene que ser el enlace
       </Typography>
     </>
-  )
+  );
 }
-export default Body
+export default Body;
