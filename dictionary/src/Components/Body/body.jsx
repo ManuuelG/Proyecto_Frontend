@@ -254,7 +254,6 @@ function Body({ searchTerm, selectedFont }) {
           paddingBottom: "10px",
           fontSize: "14px",
           marginTop: "15px",
-          fontSize: "18px",
           color: "#757575",
           textDecoration: "underline",
           fontFamily: selectedFont,
