@@ -1,4 +1,4 @@
-import { Typography, Divider, Box } from "@mui/material";
+import { Typography, Divider, Box, colors } from "@mui/material";
 import Play from "../PlayButton/play";
 
 import { useEffect, useState } from "react";
@@ -67,114 +67,7 @@ function Body({ searchTerm, selectedFont }) {
 
       <Typography
         sx={{
-          paddingLeft: "60px",
-          marginTop: "15px",
-          fontSize: "18px",
-          "& li": {
-            marginBottom: "13px",
-          },
-        }}
-      >
-        {wordData.meanings &&
-          wordData.meanings.map((meaning, index) => (
-            <Box key={index}>
-              <Typography
-                sx={{
-                  paddingLeft: "40px",
-                  fontSize: "24px",
-                  fontStyle: "italic",
-                  fontWeight: 700,
-                  marginTop: "40px",
-                }}
-              >
-                {meaning.partOfSpeech}
-              </Typography>
-              <Divider
-                orientation="horizontal"
-                flexItem
-                sx={{ marginLeft: "120px", marginTop: "-13px" }}
-              />
-              <Typography
-                sx={{
-                  paddingLeft: "40px",
-                  fontSize: "20px",
-                  marginTop: "40px",
-                  color: "#757575",
-                }}
-              >
-                Meaning
-              </Typography>
-              <ul>
-                {meaning.definitions.map((definition, definitionIndex) => (
-                  <li key={definitionIndex}>
-                    {definition.definition}
-                    {definition.example && <p>Example: {definition.example}</p>}
-                  </li>
-                ))}
-              </ul>
-              <Typography
-                sx={{
-                  color: "#757575",
-                  paddingLeft: "40px",
-                  fontSize: "20px",
-                  fontWeight: 400,
-                  marginTop: "40px",
-                }}
-              >
-                Synonyms
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#A445ED",
-                  paddingLeft: "150px",
-                  marginTop: "-30px",
-                  fontSize: "20px",
-                  fontWeight: 700,
-                }}
-              >
-                {meaning.synonyms?.map((synonym, synonymIndex) => (
-                  <span key={synonymIndex}>
-                    {synonym}
-                    {synonymIndex < meaning.synonyms.length - 1 && ", "}
-                  </span>
-                ))}
-              </Typography>
-            </Box>
-          ))}
-      </Typography>
-
-      <Typography
-        variant="body2"
-        sx={{
           paddingLeft: "40px",
-          fontSize: "24px",
-          fontStyle: "italic",
-          fontWeight: 700,
-          marginTop: "40px",
-        }}
-      >
-        verb
-      </Typography>
-      <Divider
-        orientation="horizontal"
-        flexItem
-        sx={{ marginLeft: "120px", marginTop: "-16px" }}
-      />
-
-      <Typography
-        sx={{
-          paddingLeft: "40px",
-          fontSize: "20px",
-          marginTop: "40px",
-          color: "#757575",
-        }}
-      >
-        Meaning
-      </Typography>
-
-      <Typography
-        sx={{
-          paddingLeft: "60px",
           marginTop: "15px",
           fontSize: "18px",
           "& li": {
@@ -188,7 +81,6 @@ function Body({ searchTerm, selectedFont }) {
             <Box key={index}>
               <Typography
                 sx={{
-                  paddingLeft: "40px",
                   fontSize: "24px",
                   fontStyle: "italic",
                   fontWeight: 700,
@@ -198,14 +90,19 @@ function Body({ searchTerm, selectedFont }) {
               >
                 {meaning.partOfSpeech}
               </Typography>
+
               <Divider
                 orientation="horizontal"
                 flexItem
-                sx={{ marginLeft: "120px", marginTop: "-13px" }}
+                sx={{
+                  marginLeft: "150px",
+                  marginTop: "-15px",
+                  backgroundColor: "#3A3A3A",
+                }}
               />
+
               <Typography
                 sx={{
-                  paddingLeft: "40px",
                   fontSize: "20px",
                   marginTop: "40px",
                   color: "#757575",
@@ -214,16 +111,19 @@ function Body({ searchTerm, selectedFont }) {
               >
                 Meaning
               </Typography>
+
               <ul>
                 {meaning.definitions.map((definition, definitionIndex) => (
-                  <li key={definitionIndex}>{definition.definition}</li>
+                  <li key={definitionIndex} style={{ color: "#8F19E8" }}>
+                    <span>{definition.definition}</span>
+                  </li>
                 ))}
               </ul>
+
               {meaning.synonyms.length > 0 && (
                 <Typography
                   sx={{
                     color: "#757575",
-                    paddingLeft: "40px",
                     fontSize: "20px",
                     fontWeight: 400,
                     marginTop: "40px",
@@ -236,7 +136,7 @@ function Body({ searchTerm, selectedFont }) {
               <Typography
                 sx={{
                   color: "#A445ED",
-                  paddingLeft: "150px",
+                  paddingLeft: "120px",
                   marginTop: "-30px",
                   fontSize: "20px",
                   fontWeight: 700,
@@ -248,6 +148,12 @@ function Body({ searchTerm, selectedFont }) {
             </Box>
           ))}
       </Typography>
+
+      <Divider
+        orientation="horizontal"
+        flexItem
+        sx={{ marginTop: "40px", backgroundColor: "#3A3A3A" }}
+      />
 
       <Typography
         sx={{

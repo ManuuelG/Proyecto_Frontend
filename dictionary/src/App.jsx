@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import Navbar from './Components/Navbar/navbar'
 import Body from './Components/Body/body'
@@ -8,12 +8,21 @@ function App() {
   const [themeMode, setThemeMode] = useState('light')
   const [selectedFont, setSelectedFont] = useState('')
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      setThemeMode(savedTheme)
+    }
+  }, [])
+
   const handleSearch = term => {
     setSearchTerm(term)
   }
 
   const handleThemeChange = () => {
-    setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'))
+    const newTheme = themeMode === 'light' ? 'dark' : 'light'
+    setThemeMode(newTheme)
+    localStorage.setItem('theme', newTheme)
   }
 
   const handleFontChange = font => {
@@ -24,7 +33,8 @@ function App() {
     <Box
       sx={{
         height: 'auto',
-        backgroundColor: themeMode === 'dark' ? '#303030' : '#ffffff',
+
+        backgroundColor: themeMode === 'dark' ? '#050505' : '#ffffff',
         color: themeMode === 'dark' ? '#ffffff' : '#000000',
         transition: 'background-color 0.3s, color 0.3s',
       }}
