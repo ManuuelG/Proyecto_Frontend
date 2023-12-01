@@ -33,7 +33,8 @@ function App() {
     <Box
       sx={{
         height: 'auto',
-        backgroundColor: themeMode === 'dark' ? '#303030' : '#ffffff',
+
+        backgroundColor: themeMode === 'dark' ? '#050505' : '#ffffff',
         color: themeMode === 'dark' ? '#ffffff' : '#000000',
         transition: 'background-color 0.3s, color 0.3s',
       }}
