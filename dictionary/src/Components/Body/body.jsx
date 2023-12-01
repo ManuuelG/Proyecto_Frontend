@@ -44,7 +44,9 @@ function Body({ searchTerm, selectedFont }) {
           {wordData.word}
         </Typography>
 
-        {wordData.phonetics && wordData.phonetics.length > 0 && <Play />}
+        {wordData.phonetics && wordData.phonetics.length > 0 && (
+          <Play data={wordData} />
+        )}
       </Box>
 
       <Typography
