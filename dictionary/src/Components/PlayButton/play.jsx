@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import axios from "axios";
+
 const Play = ({ searchTerm, data }) => {
   const [soundUrl, setSoundUrl] = useState([]);
   const baseUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`;
