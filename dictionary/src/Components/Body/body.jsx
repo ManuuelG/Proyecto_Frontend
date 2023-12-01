@@ -7,10 +7,6 @@ import axios from 'axios'
 function Body({ searchTerm, selectedFont }) {
   const [wordData, setWordData] = useState({})
 
-  
-
-
-
   useEffect(() => {
     if (searchTerm) {
       axios
@@ -96,9 +92,13 @@ function Body({ searchTerm, selectedFont }) {
               <Divider
                 orientation="horizontal"
                 flexItem
-                sx={{ marginLeft: '150px', marginTop: '-15px', backgroundColor: '#3A3A3A' }}
+                sx={{
+                  marginLeft: '150px',
+                  marginTop: '-15px',
+                  backgroundColor: '#3A3A3A',
+                }}
               />
-              
+
               <Typography
                 sx={{
                   fontSize: '20px',
@@ -112,14 +112,11 @@ function Body({ searchTerm, selectedFont }) {
 
               <ul>
                 {meaning.definitions.map((definition, definitionIndex) => (
-                  <li key={definitionIndex} style={{ color: "#8F19E8" }}>
-                    <span>
-                      {definition.definition}
-                    </span>
+                  <li key={definitionIndex} style={{ color: '#8F19E8' }}>
+                    <span>{definition.definition}</span>
                   </li>
                 ))}
               </ul>
-              
 
               {meaning.synonyms.length > 0 && (
                 <Typography
@@ -145,13 +142,16 @@ function Body({ searchTerm, selectedFont }) {
                 }}
               >
                 {meaning.synonyms.join(' ')}
-                
               </Typography>
             </Box>
           ))}
       </Typography>
 
-      <Divider orientation="horizontal" flexItem sx={{ marginTop: '40px',  backgroundColor: '#3A3A3A' }} />
+      <Divider
+        orientation="horizontal"
+        flexItem
+        sx={{ marginTop: '40px', backgroundColor: '#3A3A3A' }}
+      />
 
       <Typography
         sx={{

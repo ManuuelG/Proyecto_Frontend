@@ -8,6 +8,8 @@ import {
   Divider,
   IconButton,
   InputBase,
+  FormHelperText,
+  Box,
 } from '@mui/material/'
 
 import { useState } from 'react'
@@ -19,14 +21,20 @@ import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [isFormActive, setIsFormActive] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const handleChange = event => {
     setSearchTerm(event.target.value)
+    setIsError(false)
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    onSearch(searchTerm)
+    if (searchTerm === '') {
+      setIsError(true)
+    } else {
+      onSearch(searchTerm)
+    }
   }
 
   return (
@@ -98,9 +106,15 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
                   },
               }}
             >
-              <MenuItem value="monospace">Monospace</MenuItem>
-              <MenuItem value="sans-serif">Sans-serif</MenuItem>
-              <MenuItem value="serif">Serif</MenuItem>
+              <MenuItem value="monospace" style={{ fontFamily: 'monospace' }}>
+                Monospace
+              </MenuItem>
+              <MenuItem value="sans-serif" style={{ fontFamily: 'sans-serif' }}>
+                Sans-serif
+              </MenuItem>
+              <MenuItem value="serif" style={{ fontFamily: 'serif' }}>
+                Serif
+              </MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton onThemeChange={onThemeChange} />
@@ -125,7 +139,11 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
             display: 'flex',
             borderRadius: '16px',
             transition: 'background-color 0.3s',
-            border: isFormActive ? '2px solid #A445ED' : 'none',
+            border: isError
+              ? '2px solid #FF5252'
+              : isFormActive
+              ? '2px solid #A445ED'
+              : 'none',
           }}
         >
           <IconButton size="large" type="submit">
@@ -143,6 +161,22 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
           />
         </form>
       </Container>
+      {isError && (
+        <FormHelperText
+          error
+          sx={{
+            marginLeft: '190px',
+            color: '#FF5252',
+            fontSize: '20px',
+            fontWeight: '400',
+            lineHeight: 'normal',
+            transition: 'opacity 0.5s ease',
+            opacity: 1,
+          }}
+        >
+          Whoops, can't be empty...
+        </FormHelperText>
+      )}
     </>
   )
 }
