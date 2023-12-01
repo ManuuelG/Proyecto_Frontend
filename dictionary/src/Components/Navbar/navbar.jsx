@@ -16,8 +16,9 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 
-function Navbar({ onSearch, onThemeChange }) {
+function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
   const [searchTerm, setSearchTerm] = useState('')
+  const [isFormActive, setIsFormActive] = useState(false)
 
   const handleChange = event => {
     setSearchTerm(event.target.value)
@@ -74,11 +75,16 @@ function Navbar({ onSearch, onThemeChange }) {
           divider={<Divider orientation="vertical" flexItem />}
         >
           <FormControl sx={{ minWidth: 120 }} size="small">
-            <InputLabel id="demo-simple-select-label">Font</InputLabel>
+            <InputLabel id="demo-simple-select-label"></InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Font"
+              value={selectedFont}
+              onChange={e => {
+                const font = e.target.value
+                onFontChange(font)
+              }}
               sx={{
                 boxShadow: 'none',
                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
@@ -92,12 +98,9 @@ function Navbar({ onSearch, onThemeChange }) {
                   },
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem>Ten</MenuItem>
-              <MenuItem>Twenty</MenuItem>
-              <MenuItem>Thirty</MenuItem>
+              <MenuItem value="monospace">Monospace</MenuItem>
+              <MenuItem value="sans-serif">Sans-serif</MenuItem>
+              <MenuItem value="serif">Serif</MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton onThemeChange={onThemeChange} />
@@ -114,11 +117,15 @@ function Navbar({ onSearch, onThemeChange }) {
       >
         <form
           onSubmit={handleSubmit}
+          onFocus={() => setIsFormActive(true)}
+          onBlur={() => setIsFormActive(false)}
           style={{
             width: '100%',
             backgroundColor: '#f0f0f0',
             display: 'flex',
             borderRadius: '16px',
+            transition: 'background-color 0.3s',
+            border: isFormActive ? '2px solid #A445ED' : 'none',
           }}
         >
           <IconButton size="large" type="submit">
