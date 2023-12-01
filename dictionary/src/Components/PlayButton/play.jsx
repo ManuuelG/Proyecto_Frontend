@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import axios from "axios";
-
 const Play = ({ searchTerm, data }) => {
   const [soundUrl, setSoundUrl] = useState([]);
   const baseUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`;
-
   useEffect(() => {
     if (searchTerm) {
       axios
         .get(baseUrl)
         .then((response) => {
-          const phonetics = response.data[0]?.phonetics;
+          const phonetics = response.data?.phonetics;
           if (phonetics && phonetics.length > 0) {
             const audioUrl = phonetics[0]?.audio;
             if (audioUrl) {
@@ -26,9 +24,21 @@ const Play = ({ searchTerm, data }) => {
   }, [searchTerm]);
 
   const handleSound = (event) => {
-    console.log(data.phonetics[0].audio);
-  };
+    const phonetics = data.phonetics;
+    const audioUrl = phonetics && phonetics[0]?.audio;
 
+    if (audioUrl) {
+      const audio = new Audio(audioUrl);
+      audio.play();
+    } else if (phonetics) {
+      const alternativeAudio = phonetics.find((audio) => audio.audio)?.audio;
+
+      if (alternativeAudio) {
+        const audio = new Audio(alternativeAudio);
+        audio.play();
+      }
+    }
+  };
   return (
     <Box
       sx={{
@@ -67,5 +77,4 @@ const Play = ({ searchTerm, data }) => {
     </Box>
   );
 };
-
 export default Play;
