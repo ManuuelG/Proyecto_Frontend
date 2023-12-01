@@ -4,7 +4,7 @@ import Play from "../PlayButton/play";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Body({ searchTerm }) {
+function Body({ searchTerm, selectedFont }) {
   const [wordData, setWordData] = useState({});
 
   useEffect(() => {
@@ -26,8 +26,11 @@ function Body({ searchTerm }) {
     <>
       <Box
         sx={{
-          float: "right",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
           marginTop: "63px",
+          fontFamily: selectedFont,
         }}
       >
         <Play data={wordData} />
@@ -37,9 +40,10 @@ function Body({ searchTerm }) {
         <Typography
           variant="h2"
           sx={{
-            paddingLeft: "40px",
-            marginTop: "43px",
+            marginLeft: "40px",
+            fontSize: "64px",
             fontWeight: "700",
+            fontFamily: selectedFont,
           }}
         >
           {wordData.word}
@@ -52,6 +56,7 @@ function Body({ searchTerm }) {
           marginTop: "8px",
           fontSize: "24px",
           color: "#A445ED",
+          fontFamily: selectedFont,
         }}
       >
         {wordData.phonetics &&
@@ -137,16 +142,14 @@ function Body({ searchTerm }) {
           ))}
       </Typography>
 
-      {/* -----------------------------------------------------------------------------------
-
       <Typography
         variant="body2"
         sx={{
-          paddingLeft: '40px',
-          fontSize: '24px',
-          fontStyle: 'italic',
+          paddingLeft: "40px",
+          fontSize: "24px",
+          fontStyle: "italic",
           fontWeight: 700,
-          marginTop: '40px',
+          marginTop: "40px",
         }}
       >
         verb
@@ -154,15 +157,15 @@ function Body({ searchTerm }) {
       <Divider
         orientation="horizontal"
         flexItem
-        sx={{ marginLeft: '120px', marginTop: '-16px' }}
+        sx={{ marginLeft: "120px", marginTop: "-16px" }}
       />
 
       <Typography
         sx={{
-          paddingLeft: '40px',
-          fontSize: '20px',
-          marginTop: '40px',
-          color: '#757575',
+          paddingLeft: "40px",
+          fontSize: "20px",
+          marginTop: "40px",
+          color: "#757575",
         }}
       >
         Meaning
@@ -170,70 +173,117 @@ function Body({ searchTerm }) {
 
       <Typography
         sx={{
-          paddingLeft: '60px',
-          marginTop: '15px',
-          fontSize: '18px',
-          '& li': {
-            marginBottom: '13px',
+          paddingLeft: "60px",
+          marginTop: "15px",
+          fontSize: "18px",
+          "& li": {
+            marginBottom: "13px",
+            fontFamily: selectedFont,
           },
         }}
       >
         {wordData.meanings &&
-          wordData.meanings
-            .filter(meaning => meaning.partOfSpeech === 'verb')
-            .map((meaning, index) => (
-              <Box key={index}>
-                <p>Part of Speech: {meaning.partOfSpeech}</p>
-                <ul>
-                  {meaning.definitions.map((definition, definitionIndex) => (
-                    <li key={definitionIndex}>
-                      {definition.definition}
-                      {definition.example && (
-                        <p>Example: {definition.example}</p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Box>
-            ))}
+          wordData.meanings.map((meaning, index) => (
+            <Box key={index}>
+              <Typography
+                sx={{
+                  paddingLeft: "40px",
+                  fontSize: "24px",
+                  fontStyle: "italic",
+                  fontWeight: 700,
+                  marginTop: "40px",
+                  fontFamily: selectedFont,
+                }}
+              >
+                {meaning.partOfSpeech}
+              </Typography>
+              <Divider
+                orientation="horizontal"
+                flexItem
+                sx={{ marginLeft: "120px", marginTop: "-13px" }}
+              />
+              <Typography
+                sx={{
+                  paddingLeft: "40px",
+                  fontSize: "20px",
+                  marginTop: "40px",
+                  color: "#757575",
+                  fontFamily: selectedFont,
+                }}
+              >
+                Meaning
+              </Typography>
+              <ul>
+                {meaning.definitions.map((definition, definitionIndex) => (
+                  <li key={definitionIndex}>{definition.definition}</li>
+                ))}
+              </ul>
+              {meaning.synonyms.length > 0 && (
+                <Typography
+                  sx={{
+                    color: "#757575",
+                    paddingLeft: "40px",
+                    fontSize: "20px",
+                    fontWeight: 400,
+                    marginTop: "40px",
+                    fontFamily: selectedFont,
+                  }}
+                >
+                  {Object.keys(meaning)[2]}
+                </Typography>
+              )}
+              <Typography
+                sx={{
+                  color: "#A445ED",
+                  paddingLeft: "150px",
+                  marginTop: "-30px",
+                  fontSize: "20px",
+                  fontWeight: 700,
+                  fontFamily: selectedFont,
+                }}
+              >
+                {meaning.synonyms.join(" ")}
+              </Typography>
+            </Box>
+          ))}
       </Typography>
-
-      <Typography
-        sx={{
-          paddingLeft: '85px',
-          marginTop: '15px',
-          fontSize: '18px',
-          color: '#757575',
-        }}
-      >
-        “Keyboarding is the part of this job I hate the most.”
-      </Typography> */}
-
-      <Divider orientation="horizontal" flexItem sx={{ marginTop: "40px" }} />
 
       <Typography
         sx={{
           paddingLeft: "40px",
+          paddingBottom: "10px",
           fontSize: "14px",
           marginTop: "15px",
+          fontSize: "18px",
           color: "#757575",
           textDecoration: "underline",
+          fontFamily: selectedFont,
         }}
       >
-        Source
+        {Object.keys(wordData).find((key) => key.includes("source"))}
       </Typography>
 
-      <Typography
-        sx={{
-          paddingLeft: "100px",
-          fontSize: "14px",
-          marginTop: "-21px",
-          color: "#2D2D2D",
-          textDecoration: "underline",
-        }}
-      >
-        Esto tiene que ser el enlace
-      </Typography>
+      {wordData.sourceUrls && (
+        <Typography
+          sx={{
+            paddingLeft: "150px",
+            fontSize: "14px",
+            marginTop: "-30px",
+            color: "#2D2D2D",
+            textDecoration: "underline",
+          }}
+        >
+          {wordData.sourceUrls && wordData.sourceUrls.length > 0 && (
+            <a
+              href={wordData.sourceUrls[0]}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {wordData.sourceUrls[0]}
+            </a>
+          )}
+        </Typography>
+      )}
     </>
   );
 }

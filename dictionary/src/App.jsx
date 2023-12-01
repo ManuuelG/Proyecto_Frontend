@@ -6,6 +6,7 @@ import Body from './Components/Body/body'
 function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [themeMode, setThemeMode] = useState('light')
+  const [selectedFont, setSelectedFont] = useState('')
 
   const handleSearch = term => {
     setSearchTerm(term)
@@ -15,19 +16,27 @@ function App() {
     setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'))
   }
 
+  const handleFontChange = font => {
+    setSelectedFont(font)
+  }
+
   return (
     <Box
       sx={{
         height: 'auto',
-
         backgroundColor: themeMode === 'dark' ? '#303030' : '#ffffff',
         color: themeMode === 'dark' ? '#ffffff' : '#000000',
         transition: 'background-color 0.3s, color 0.3s',
       }}
     >
-      <Navbar onSearch={handleSearch} onThemeChange={handleThemeChange} />
+      <Navbar
+        onSearch={handleSearch}
+        onThemeChange={handleThemeChange}
+        onFontChange={handleFontChange}
+        selectedFont={selectedFont}
+      />
 
-      <Body searchTerm={searchTerm} />
+      <Body searchTerm={searchTerm} selectedFont={selectedFont} />
     </Box>
   )
 }
