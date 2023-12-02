@@ -4,7 +4,10 @@ import axios from 'axios'
 
 const Play = ({ searchTerm, data }) => {
   const [soundUrl, setSoundUrl] = useState([])
+  const [isHovered, setHover] = useState(false)
+
   const baseUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`
+
   useEffect(() => {
     if (searchTerm) {
       axios
@@ -40,6 +43,7 @@ const Play = ({ searchTerm, data }) => {
       }
     }
   }
+
   return (
     <Box
       sx={{
@@ -52,6 +56,8 @@ const Play = ({ searchTerm, data }) => {
       <button
         type="button"
         onClick={handleSound}
+        onMouseEnter={() => setHover(true)} // Establecer isHovered como true al pasar el ratón por encima
+        onMouseLeave={() => setHover(false)} // Establecer isHovered como false al quitar el ratón
         style={{
           background: 'none',
           border: 'none',
@@ -59,23 +65,48 @@ const Play = ({ searchTerm, data }) => {
           cursor: 'pointer',
         }}
       >
-        <svg
-          width="75"
-          height="75"
-          viewBox="0 0 75 75"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle opacity="0.25" cx="37.5" cy="37.5" r="37.5" fill="#A445ED" />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M29 27V48L50 37.5L29 27Z"
-            fill="#A445ED"
-          />
-        </svg>
+        {isHovered ? (
+          <svg
+            width="75"
+            height="75"
+            viewBox="0 0 75 75"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="37.5" cy="37.5" r="37.5" fill="#A445ED" />
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M29 27V48L50 37.5L29 27Z"
+              fill="white"
+            />
+          </svg>
+        ) : (
+          <svg
+            width="75"
+            height="75"
+            viewBox="0 0 75 75"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              opacity="0.25"
+              cx="37.5"
+              cy="37.5"
+              r="37.5"
+              fill="#A445ED"
+            />
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M29 27V48L50 37.5L29 27Z"
+              fill="#A445ED"
+            />
+          </svg>
+        )}
       </button>
     </Box>
   )
 }
+
 export default Play
