@@ -8,6 +8,8 @@ import {
   Divider,
   IconButton,
   InputBase,
+  FormHelperText,
+  Box,
 } from '@mui/material/'
 
 import { useState } from 'react'
@@ -16,17 +18,29 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 
-function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
+function Navbar({
+  onSearch,
+  onThemeChange,
+  onFontChange,
+  selectedFont,
+  themeMode,
+}) {
   const [searchTerm, setSearchTerm] = useState('')
   const [isFormActive, setIsFormActive] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const handleChange = event => {
     setSearchTerm(event.target.value)
+    setIsError(false)
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    onSearch(searchTerm)
+    if (searchTerm === '') {
+      setIsError(true)
+    } else {
+      onSearch(searchTerm)
+    }
   }
 
   return (
@@ -74,39 +88,37 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
           alignItems={'center'}
           divider={<Divider orientation="vertical" flexItem sx={{  backgroundColor: '#3A3A3A' }}/>}
         >
-        <FormControl sx={{ minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label"></InputLabel>
-          <Select
-            
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Font"
-            value={selectedFont}
-            onChange={e => {
-              const font = e.target.value;
-              onFontChange(font);
-            }}
-            sx={{
-              borderRadius: 0,
-              '&.MuiOutlinedInput-root': {
-                '& fieldset': {
-                  border: 0,
-                },
-                '&:hover fieldset': {
-                  border: 0,
-                },
-                '&.Mui-focused fieldset': {
-                  border: 0,
-                },
-              },
-            }}
-          >
+          <FormControl sx={{ minWidth: 120 }} size="small">
+            <InputLabel id="demo-simple-select-label"></InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Font"
+              value={selectedFont}
+              onChange={e => {
+                const font = e.target.value
+                onFontChange(font)
+              }}
+              sx={{
+                color: themeMode === 'dark' ? '#ffffff' : '#000000',
+                boxShadow: 'none',
+                '.MuiOutlinedInput-notchedOutline': { border: 0 },
+                '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+                '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                  {
+                    border: 0,
+                  },
+              }}
+            >
             <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="monospace">Monospace</MenuItem>
             <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="sans-serif">Sans-serif</MenuItem>
             <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="serif">Serif</MenuItem>
-          </Select>
-        </FormControl>
-        <ColorThemeButton onThemeChange={onThemeChange} />
+            </Select>
+          </FormControl>
+          <ColorThemeButton onThemeChange={onThemeChange} />
         </Stack>
       </Container>
 
@@ -124,28 +136,51 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
           onBlur={() => setIsFormActive(false)}
           style={{
             width: '100%',
-            backgroundColor: '#f0f0f0',
+            backgroundColor: themeMode === 'dark' ? '#1F1F1F' : '#F4F4F4',
             display: 'flex',
             borderRadius: '16px',
             transition: 'background-color 0.3s',
-            border: isFormActive ? '2px solid #A445ED' : 'none',
+            border: isError
+              ? '1px solid #FF5252'
+              : isFormActive
+              ? '1px solid #A445ED'
+              : 'none',
           }}
         >
-          <IconButton size="large" type="submit">
-            <SearchIcon />
-          </IconButton>
-
           <InputBase
-            placeholder="Search..."
+            placeholder="Search for any word..."
             value={searchTerm}
             onChange={handleChange}
             sx={{
+              color: themeMode === 'dark' ? '#FFFFFF' : '#2D2D2D',
+              paddingLeft:'24px',
               borderRadius: '5px',
               width: '100%',
             }}
           />
+          <IconButton size="large" type="submit">
+            <SearchIcon sx={{color:'#A445ED'}}/>
+          </IconButton>
+
         </form>
       </Container>
+      {isError && (
+        <FormHelperText
+          error
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            color: '#FF5252',
+            fontSize: '20px',
+            fontWeight: '400',
+            lineHeight: 'normal',
+            transition: 'opacity 0.5s ease',
+            opacity: 1,
+          }}
+        >
+          Whoops, can't be empty...
+        </FormHelperText>
+      )}
     </>
   )
 }

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/material';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { Box } from '@mui/material'
+import axios from 'axios'
 
 const Play = ({ searchTerm, data }) => {
   const [soundUrl, setSoundUrl] = useState([]);
@@ -25,16 +25,18 @@ const Play = ({ searchTerm, data }) => {
           console.error('Error fetching word data', error);
         });
     }
-  }, [searchTerm]);
+  }, [searchTerm])
 
-  const handleSound = () => {
-    const phonetics = data.phonetics;
-    const audioUrl = phonetics && phonetics[0]?.audio;
+  const handleSound = event => {
+    const phonetics = data.phonetics
+    const audioUrl = phonetics && phonetics[0]?.audio
+
     if (audioUrl) {
       const audio = new Audio(audioUrl);
       audio.play();
     } else if (phonetics) {
-      const alternativeAudio = phonetics.find(audio => audio.audio)?.audio;
+      const alternativeAudio = phonetics.find(audio => audio.audio)?.audio
+
       if (alternativeAudio) {
         const audio = new Audio(alternativeAudio);
         audio.play();
