@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import { Box } from '@mui/material'
+import axios from 'axios'
 
 const Play = ({ searchTerm, data }) => {
-  const [soundUrl, setSoundUrl] = useState([]);
-  const baseUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`;
+  const [soundUrl, setSoundUrl] = useState([])
+  const baseUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`
   useEffect(() => {
     if (searchTerm) {
       axios
         .get(baseUrl)
-        .then((response) => {
-          const phonetics = response.data?.phonetics;
+        .then(response => {
+          const phonetics = response.data?.phonetics
           if (phonetics && phonetics.length > 0) {
-            const audioUrl = phonetics[0]?.audio;
+            const audioUrl = phonetics[0]?.audio
             if (audioUrl) {
-              setSoundUrl(audioUrl);
+              setSoundUrl(audioUrl)
             }
           }
         })
-        .catch((error) => {
-          console.error("Error fetching word data", error);
-        });
+        .catch(error => {
+          console.error('Error fetching word data', error)
+        })
     }
-  }, [searchTerm]);
+  }, [searchTerm])
 
-  const handleSound = (event) => {
-    const phonetics = data.phonetics;
-    const audioUrl = phonetics && phonetics[0]?.audio;
+  const handleSound = event => {
+    const phonetics = data.phonetics
+    const audioUrl = phonetics && phonetics[0]?.audio
 
     if (audioUrl) {
-      const audio = new Audio(audioUrl);
-      audio.play();
+      const audio = new Audio(audioUrl)
+      audio.play()
     } else if (phonetics) {
-      const alternativeAudio = phonetics.find((audio) => audio.audio)?.audio;
+      const alternativeAudio = phonetics.find(audio => audio.audio)?.audio
 
       if (alternativeAudio) {
-        const audio = new Audio(alternativeAudio);
-        audio.play();
+        const audio = new Audio(alternativeAudio)
+        audio.play()
       }
     }
-  };
+  }
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "flex-start",
-        padding: "20px",
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        padding: '20px',
       }}
     >
       <button
         type="button"
         onClick={handleSound}
         style={{
-          background: "none",
-          border: "none",
+          background: 'none',
+          border: 'none',
           padding: 0,
-          cursor: "pointer",
+          cursor: 'pointer',
         }}
       >
         <svg
@@ -76,6 +76,6 @@ const Play = ({ searchTerm, data }) => {
         </svg>
       </button>
     </Box>
-  );
-};
-export default Play;
+  )
+}
+export default Play

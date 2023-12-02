@@ -18,7 +18,13 @@ import SearchIcon from '@mui/icons-material/Search'
 
 import ColorThemeButton from '../ColorThemeButton/ColorThemeButton'
 
-function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
+function Navbar({
+  onSearch,
+  onThemeChange,
+  onFontChange,
+  selectedFont,
+  themeMode,
+}) {
   const [searchTerm, setSearchTerm] = useState('')
   const [isFormActive, setIsFormActive] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -94,6 +100,7 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
                 onFontChange(font)
               }}
               sx={{
+                color: themeMode === 'dark' ? '#ffffff' : '#000000',
                 boxShadow: 'none',
                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
                 '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':

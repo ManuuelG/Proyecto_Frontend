@@ -1,4 +1,4 @@
-import { Typography, Divider, Box, colors } from '@mui/material'
+import { Typography, Divider, Box } from '@mui/material'
 import Play from '../PlayButton/play'
 
 import { useEffect, useState } from 'react'
@@ -131,12 +131,24 @@ function Body({ searchTerm, selectedFont }) {
 
                   <ul>
                     {meaning.definitions.map((definition, definitionIndex) => (
-                      <li key={definitionIndex} style={{ color: '#8F19E8' }}>
+                      <li
+                        key={definitionIndex}
+                        style={{ listStyleType: 'none' }}
+                      >
+                        <span
+                          style={{
+                            color: '#8F19E8',
+                            marginRight: '0.5em',
+                            fontSize: '1.5em',
+                            verticalAlign: 'middle',
+                          }}
+                        >
+                          &bull;
+                        </span>
                         <span>{definition.definition}</span>
                       </li>
                     ))}
                   </ul>
-
                   {meaning.synonyms.length > 0 && (
                     <Typography
                       sx={{

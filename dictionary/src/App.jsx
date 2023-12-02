@@ -6,7 +6,7 @@ import Body from './Components/Body/body'
 function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [themeMode, setThemeMode] = useState('light')
-  const [selectedFont, setSelectedFont] = useState('')
+  const [selectedFont, setSelectedFont] = useState('sans-serif')
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
@@ -44,6 +44,7 @@ function App() {
         onThemeChange={handleThemeChange}
         onFontChange={handleFontChange}
         selectedFont={selectedFont}
+        themeMode={themeMode}
       />
 
       <Body searchTerm={searchTerm} selectedFont={selectedFont} />
