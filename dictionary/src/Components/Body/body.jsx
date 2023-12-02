@@ -112,14 +112,8 @@ function Body({ searchTerm, selectedFont }) {
 
               <ul>
                 {meaning.definitions.map((definition, definitionIndex) => (
-                  <li key={definitionIndex} style={{ color: "#8F19E8" }}>
-                    <span>
-                      {definition.definition}
-                    </span>
-                  </li>
-                ))}
+                  <li key={definitionIndex}>{definition.definition}</li>))}
               </ul>
-              
 
               {meaning.synonyms.length > 0 && (
                 <Typography

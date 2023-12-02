@@ -72,45 +72,48 @@ function Navbar({ onSearch, onThemeChange, onFontChange, selectedFont }) {
           direction={'row'}
           spacing={2}
           alignItems={'center'}
-          divider={<Divider orientation="vertical" flexItem />}
+          divider={<Divider orientation="vertical" flexItem sx={{  backgroundColor: '#3A3A3A' }}/>}
         >
-          <FormControl sx={{ minWidth: 120 }} size="small">
-            <InputLabel id="demo-simple-select-label"></InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Font"
-              value={selectedFont}
-              onChange={e => {
-                const font = e.target.value
-                onFontChange(font)
-              }}
-              sx={{
-                boxShadow: 'none',
-                '.MuiOutlinedInput-notchedOutline': { border: 0 },
-                '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
-                  {
-                    border: 0,
-                  },
-                '&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
-                  {
-                    border: 0,
-                  },
-              }}
-            >
-              <MenuItem value="monospace">Monospace</MenuItem>
-              <MenuItem value="sans-serif">Sans-serif</MenuItem>
-              <MenuItem value="serif">Serif</MenuItem>
-            </Select>
-          </FormControl>
-          <ColorThemeButton onThemeChange={onThemeChange} />
+        <FormControl sx={{ minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-label"></InputLabel>
+          <Select
+            
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Font"
+            value={selectedFont}
+            onChange={e => {
+              const font = e.target.value;
+              onFontChange(font);
+            }}
+            sx={{
+              borderRadius: 0,
+              '&.MuiOutlinedInput-root': {
+                '& fieldset': {
+                  border: 0,
+                },
+                '&:hover fieldset': {
+                  border: 0,
+                },
+                '&.Mui-focused fieldset': {
+                  border: 0,
+                },
+              },
+            }}
+          >
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="monospace">Monospace</MenuItem>
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="sans-serif">Sans-serif</MenuItem>
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="serif">Serif</MenuItem>
+          </Select>
+        </FormControl>
+        <ColorThemeButton onThemeChange={onThemeChange} />
         </Stack>
       </Container>
+
       <Container
         sx={{
           display: 'flex',
           alignItems: 'center',
-
           width: '100%',
           padding: '8px',
         }}
