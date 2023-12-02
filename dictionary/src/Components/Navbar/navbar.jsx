@@ -86,7 +86,7 @@ function Navbar({
           direction={'row'}
           spacing={2}
           alignItems={'center'}
-          divider={<Divider orientation="vertical" flexItem />}
+          divider={<Divider orientation="vertical" flexItem sx={{  backgroundColor: '#3A3A3A' }}/>}
         >
           <FormControl sx={{ minWidth: 120 }} size="small">
             <InputLabel id="demo-simple-select-label"></InputLabel>
@@ -113,25 +113,19 @@ function Navbar({
                   },
               }}
             >
-              <MenuItem value="monospace" style={{ fontFamily: 'monospace' }}>
-                Monospace
-              </MenuItem>
-              <MenuItem value="sans-serif" style={{ fontFamily: 'sans-serif' }}>
-                Sans-serif
-              </MenuItem>
-              <MenuItem value="serif" style={{ fontFamily: 'serif' }}>
-                Serif
-              </MenuItem>
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="monospace">Monospace</MenuItem>
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="sans-serif">Sans-serif</MenuItem>
+            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="serif">Serif</MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton onThemeChange={onThemeChange} />
         </Stack>
       </Container>
+
       <Container
         sx={{
           display: 'flex',
           alignItems: 'center',
-
           width: '100%',
           padding: '8px',
         }}
@@ -142,30 +136,32 @@ function Navbar({
           onBlur={() => setIsFormActive(false)}
           style={{
             width: '100%',
-            backgroundColor: '#f0f0f0',
+            backgroundColor: themeMode === 'dark' ? '#1F1F1F' : '#F4F4F4',
             display: 'flex',
             borderRadius: '16px',
             transition: 'background-color 0.3s',
             border: isError
-              ? '2px solid #FF5252'
+              ? '1px solid #FF5252'
               : isFormActive
-              ? '2px solid #A445ED'
+              ? '1px solid #A445ED'
               : 'none',
           }}
         >
-          <IconButton size="large" type="submit">
-            <SearchIcon />
-          </IconButton>
-
           <InputBase
-            placeholder="Search..."
+            placeholder="Search for any word..."
             value={searchTerm}
             onChange={handleChange}
             sx={{
+              color: themeMode === 'dark' ? '#FFFFFF' : '#2D2D2D',
+              paddingLeft:'24px',
               borderRadius: '5px',
               width: '100%',
             }}
           />
+          <IconButton size="large" type="submit">
+            <SearchIcon sx={{color:'#A445ED'}}/>
+          </IconButton>
+
         </form>
       </Container>
       {isError && (

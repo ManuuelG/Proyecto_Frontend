@@ -29,16 +29,13 @@ function App() {
     setSelectedFont(font)
   }
 
-  return (
-    <Box
-      sx={{
-        height: 'auto',
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = themeMode === 'dark' ? '#050505' : '#ffffff';
+    document.documentElement.style.color = themeMode === 'dark' ? '#ffffff' : '#000000';
+  }, [themeMode]);
 
-        backgroundColor: themeMode === 'dark' ? '#050505' : '#ffffff',
-        color: themeMode === 'dark' ? '#ffffff' : '#000000',
-        transition: 'background-color 0.3s, color 0.3s',
-      }}
-    >
+  return (
+    <>
       <Navbar
         onSearch={handleSearch}
         onThemeChange={handleThemeChange}
@@ -48,7 +45,7 @@ function App() {
       />
 
       <Body searchTerm={searchTerm} selectedFont={selectedFont} />
-    </Box>
+    </>
   )
 }
 
