@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Box } from '@mui/material'
 import Navbar from './Components/Navbar/navbar'
 import Body from './Components/Body/body'
 
@@ -30,9 +29,11 @@ function App() {
   }
 
   useEffect(() => {
-    document.documentElement.style.backgroundColor = themeMode === 'dark' ? '#050505' : '#ffffff';
-    document.documentElement.style.color = themeMode === 'dark' ? '#ffffff' : '#000000';
-  }, [themeMode]);
+    document.documentElement.style.backgroundColor =
+      themeMode === 'dark' ? '#050505' : '#ffffff'
+    document.documentElement.style.color =
+      themeMode === 'dark' ? '#ffffff' : '#000000'
+  }, [themeMode])
 
   return (
     <>
