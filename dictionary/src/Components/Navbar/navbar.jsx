@@ -172,7 +172,8 @@ function Navbar({
         <FormHelperText
           error
           sx={{
-            marginLeft: '190px',
+            display: 'flex',
+            justifyContent: 'center',
             color: '#FF5252',
             fontSize: '20px',
             fontWeight: '400',
