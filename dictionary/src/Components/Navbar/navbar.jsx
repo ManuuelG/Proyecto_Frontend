@@ -12,6 +12,8 @@ import {
   Box,
 } from '@mui/material/'
 
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
 import { useState } from 'react'
 
 import SearchIcon from '@mui/icons-material/Search'
@@ -86,11 +88,24 @@ function Navbar({
           direction={'row'}
           spacing={2}
           alignItems={'center'}
-          divider={<Divider orientation="vertical" flexItem sx={{  backgroundColor: '#3A3A3A' }}/>}
+          divider={
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ backgroundColor: '#3A3A3A' }}
+            />
+          }
         >
           <FormControl sx={{ minWidth: 120 }} size="small">
             <InputLabel id="demo-simple-select-label"></InputLabel>
             <Select
+              IconComponent={() => (
+                <ExpandMoreIcon
+                  sx={{
+                    color: '#A445ED',
+                  }}
+                />
+              )}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Font"
@@ -101,7 +116,7 @@ function Navbar({
               }}
               sx={{
                 color: themeMode === 'dark' ? '#ffffff' : '#000000',
-                boxShadow: 'none',
+
                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
                 '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
                   {
@@ -111,11 +126,62 @@ function Navbar({
                   {
                     border: 0,
                   },
+                '& .MuiSelect-icon': {
+                  color: themeMode === 'dark' ? '#ffffff' : '#000000',
+                },
+              }}
+              inputProps={{
+                MenuProps: {
+                  sx: {
+                    '& .MuiPaper-root': {
+                      backgroundColor:
+                        themeMode === 'dark' ? '#1F1F1F' : '#ffffff',
+                      color: themeMode === 'dark' ? '#ffffff' : '#000000',
+                      boxShadow:
+                        themeMode === 'dark'
+                          ? '0px 5px 30px 0px #A445ED'
+                          : 'none',
+                    },
+                  },
+                },
               }}
             >
-            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="monospace">Monospace</MenuItem>
-            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="sans-serif">Sans-serif</MenuItem>
-            <MenuItem sx={{'&:hover': {color: "#A445ED",  backgroundColor: 'transparent' }}} value="serif">Serif</MenuItem>
+              <MenuItem
+                sx={{
+                  '&:hover': {
+                    color: '#A445ED',
+                    backgroundColor: 'transparent',
+                  },
+                  fontFamily: 'monospace',
+                }}
+                value="monospace"
+              >
+                Monospace
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  '&:hover': {
+                    color: '#A445ED',
+                    backgroundColor: 'transparent',
+                  },
+                  fontFamily: 'sans-serif',
+                }}
+                value="sans-serif"
+              >
+                Sans-serif
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  '&:hover': {
+                    color: '#A445ED',
+                    backgroundColor: 'transparent',
+                  },
+                  fontFamily: 'serif',
+                }}
+                value="serif"
+              >
+                Serif
+              </MenuItem>
             </Select>
           </FormControl>
           <ColorThemeButton onThemeChange={onThemeChange} />
@@ -139,7 +205,6 @@ function Navbar({
             backgroundColor: themeMode === 'dark' ? '#1F1F1F' : '#F4F4F4',
             display: 'flex',
             borderRadius: '16px',
-            transition: 'background-color 0.3s',
             border: isError
               ? '1px solid #FF5252'
               : isFormActive
@@ -153,15 +218,14 @@ function Navbar({
             onChange={handleChange}
             sx={{
               color: themeMode === 'dark' ? '#FFFFFF' : '#2D2D2D',
-              paddingLeft:'24px',
+              paddingLeft: '24px',
               borderRadius: '5px',
               width: '100%',
             }}
           />
           <IconButton size="large" type="submit">
-            <SearchIcon sx={{color:'#A445ED'}}/>
+            <SearchIcon sx={{ color: '#A445ED' }} />
           </IconButton>
-
         </form>
       </Container>
       {isError && (
