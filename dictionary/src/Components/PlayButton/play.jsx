@@ -50,14 +50,14 @@ const Play = ({ searchTerm, data }) => {
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'flex-start',
-        padding: '20px',
+        paddingRight: '20px',
       }}
     >
       <button
         type="button"
         onClick={handleSound}
-        onMouseEnter={() => setHover(true)} // Establecer isHovered como true al pasar el ratón por encima
-        onMouseLeave={() => setHover(false)} // Establecer isHovered como false al quitar el ratón
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         style={{
           background: 'none',
           border: 'none',
