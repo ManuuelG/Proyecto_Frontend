@@ -31,13 +31,29 @@ function Body({ searchTerm, selectedFont }) {
         <Typography
           variant="h4"
           sx={{
-            marginLeft: '300px',
-            marginTop: '20px',
-            color: 'black',
+            width: '60%',
+            height: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: 'auto',
+            marginTop: '132px',
+            fontSize: '75px',
             fontFamily: selectedFont,
           }}
         >
-          😢No encontramos esa palabra.¿Nos sigues queriendo igual?
+          <span style={{ fontSize: '75px' }}>😢</span>
+          <p style={{ fontSize: '20px', fontWeight: '700' }}>
+            No Definition Found
+          </p>
+          <p
+            style={{ fontSize: '18px', color: '#757575', textAlign: 'center' }}
+          >
+            Sorry pal, we couldn't find definitions for the word you were
+            looking for. You can try the search again at later time or head to
+            the web instead.
+          </p>
         </Typography>
       ) : (
         <>
@@ -50,7 +66,6 @@ function Body({ searchTerm, selectedFont }) {
               fontFamily: selectedFont,
             }}
           ></Box>
-
           <Box>
             <Typography
               variant="h2"
@@ -62,10 +77,10 @@ function Body({ searchTerm, selectedFont }) {
               }}
             >
               {wordData.word}
+              {wordData.phonetics && wordData.phonetics.length > 0 && (
+                <Play data={wordData} />
+              )}
             </Typography>
-            {wordData.phonetics && wordData.phonetics.length > 0 && (
-              <Play data={wordData} />
-            )}
           </Box>
 
           <Typography
