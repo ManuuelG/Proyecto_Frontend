@@ -17,13 +17,10 @@ function Body({ searchTerm, selectedFont }) {
           setError(null)
         })
         .catch(error => {
-          console.error('Error fetching word data', error)
           setError(error)
         })
     }
   }, [searchTerm])
-
-  console.log(wordData)
 
   return (
     <>
